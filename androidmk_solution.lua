@@ -65,7 +65,7 @@ function androidmk.slnPremakeHelp(sln)
 
 	p.w('  $(info )')
 	p.w('  $(info Usage:)')
-	p.w('  $(info $()  ndk-build NDK_APPLICATION_MK=<file> %s=<config>)', androidmk.CONFIG_OPTION)
+	p.w('  $(info $()  ndk-build %s=<config>)', androidmk.CONFIG_OPTION)
 	p.w('  $(info )')
 	p.w('  $(info CONFIGURATIONS:)')
 	for cfg in solution.eachconfig(sln) do
