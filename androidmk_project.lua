@@ -43,6 +43,9 @@ function androidmk.prjHeader(prj)
   p.w('LOCAL_PATH := $(call my-dir)')
   p.w('include $(CLEAR_VARS)')
   p.w('LOCAL_MODULE := %s', prj.name)
+  if prj.targetname then
+    p.w('LOCAL_MODULE_FILENAME := %s', prj.targetname)
+  end
   p.w('')
 end
 
