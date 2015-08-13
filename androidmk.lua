@@ -11,36 +11,36 @@ include "_preload.lua"
 
 
 function androidmk.slnApplicationFile(sln)
-	return sln.name .."_Application.mk"
+  return sln.name .."_Application.mk"
 end
 
 function androidmk.slnAndroidFile(sln)
-	return sln.name .."_Android.mk"
+  return sln.name .."_Android.mk"
 end
 
 
 function androidmk.prjFile(prj)
-	return prj.name ..".mk"
+  return prj.name ..".mk"
 end
 
 
 androidmk.ldflags = {
-	flags = {
-		--LinkTimeOptimization = "-flto",
-	},
+  flags = {
+    --LinkTimeOptimization = "-flto",
+  },
 }
 
 androidmk.cflags = {
-	flags = {
-		FatalCompileWarnings = "-Werror",
-		ShadowedVariables = "-Wshadow",
-		UndefinedIdentifiers = "-Wundef",
-		--LinkTimeOptimization = "-flto",
-	},
-	warnings = {
-		Extra = "-Wall -Wextra",
-		Off = "-w",
-	}
+  flags = {
+    FatalCompileWarnings = "-Werror",
+    ShadowedVariables = "-Wshadow",
+    UndefinedIdentifiers = "-Wundef",
+    --LinkTimeOptimization = "-flto",
+  },
+  warnings = {
+    Extra = "-Wall -Wextra",
+    Off = "-w",
+  }
 }
 
 
