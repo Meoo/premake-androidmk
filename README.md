@@ -11,6 +11,7 @@ Supported values :
 * `debug`
 * `release`
 
+*****
 
 `ndkabi` : ABI targets
 
@@ -28,6 +29,7 @@ Or one of :
 * `default`
 * `all`
 
+*****
 
 `ndkplatform` : Android API version
 
@@ -48,6 +50,7 @@ Supported values :
 * `android-19`
 * `android-21`
 
+*****
 
 `ndktoolchainversion` : Android toolchain version
 
@@ -59,11 +62,13 @@ Supported values :
 * `clang3.4`
 * `clang3.5`
 
+*****
 
 `existingandroidmk` : Include existing Android.mk files
 
 Supported values : List of files
 
+*****
 
 `existingandroidmk_staticlinks` and `existingandroidmk_sharedlinks` : Link libs from existing Android.mk files
 
