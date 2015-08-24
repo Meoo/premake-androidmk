@@ -4,8 +4,9 @@
 -- Author : Bastien Brunnenstein
 --
 
-local androidmk = premake.androidmk
+local androidmk = premake.extensions.androidmk
 local solution = premake.solution
+local project = premake.project
 local make = premake.make
 
 local p = premake
@@ -36,20 +37,41 @@ function androidmk.generate_applicationmk(sln)
 end
 
 function androidmk.generate_androidmk(sln)
-  local includedExisting = {}
   premake.eol("\n")
   local curpath = 'SOLUTION_'..sln.name:upper()..'_PATH'
   p.w('%s := $(call my-dir)', curpath)
+  p.w('')
+
   for prj in solution.eachproject(sln) do
-    if prj.existingandroidmk then
-      if not includedExisting[prj.existingandroidmk] then
-        p.x('include $(%s)/%s', curpath, path.getrelative(sln.location, prj.existingandroidmk))
-        includedExisting[prj.existingandroidmk] = true
+    local prjpath = premake.filename(prj, androidmk.prjFile(prj))
+    local prjrelpath = path.getrelative(sln.location, prjpath)
+    p.x('include $(%s)/%s', curpath, prjrelpath)
+  end
+
+  for cfg in solution.eachconfig(sln) do
+    local existingmklist = {}
+
+    -- Agregate existing Android.mk files for each project per configuration
+    for prj in solution.eachproject(sln) do
+      for prjcfg in project.eachconfig(prj) do
+        if prjcfg.shortname == cfg.shortname then
+          for _, mkpath in ipairs(prj.existingandroidmk) do
+            local mkrelpath = path.getrelative(sln.location, mkpath)
+            if not table.contains(existingmklist, mkrelpath) then
+              table.insert(existingmklist, mkrelpath)
+            end
+          end
+        end
       end
-    else
-      local prjpath = premake.filename(prj, androidmk.prjFile(prj))
-      local prjrelpath = path.getrelative(sln.location, prjpath)
-      p.x('include $(%s)/%s', curpath, prjrelpath)
+    end
+
+    if #existingmklist > 0 then
+      p.w('')
+      p.x('ifeq ($(%s),%s)', androidmk.CONFIG_OPTION, cfg.shortname)
+      for _, mkpath in ipairs(existingmklist) do
+        p.x('  include $(%s)/%s', curpath, mkpath)
+      end
+      p.w('endif')
     end
   end
 end
@@ -87,7 +109,7 @@ local function agregateOption(sln, cfg, option)
   local first = true
   local val
   for prj in solution.eachproject(sln) do
-    for prjcfg in premake.project.eachconfig(prj) do
+    for prjcfg in project.eachconfig(prj) do
       if prjcfg.shortname == cfg.shortname then
         if first then
           first = false

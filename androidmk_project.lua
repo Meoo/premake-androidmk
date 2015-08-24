@@ -4,7 +4,7 @@
 -- Author : Bastien Brunnenstein
 --
 
-local androidmk = premake.androidmk
+local androidmk = premake.extensions.androidmk
 local make = premake.make
 local project = premake.project
 
@@ -160,6 +160,13 @@ function androidmk.prjDependencies(prj, cfg)
     else
       table.insert(shareddeps, dep.filename)
     end
+  end
+
+  for _, v in ipairs(cfg.existingandroidmk_staticlinks) do
+    table.insert(staticdeps, v)
+  end
+  for _, v in ipairs(cfg.existingandroidmk_sharedlinks) do
+    table.insert(shareddeps, v)
   end
 
   if #staticdeps > 0 then

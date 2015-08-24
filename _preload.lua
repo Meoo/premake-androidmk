@@ -4,8 +4,8 @@
 -- Author : Bastien Brunnenstein
 --
 
-premake.androidmk = premake.androidmk or {}
-local androidmk = premake.androidmk
+premake.extensions.androidmk = premake.extensions.androidmk or {}
+local androidmk = premake.extensions.androidmk
 local make = premake.make
 
 
@@ -34,10 +34,8 @@ newaction {
   end,
 
   onProject = function(prj)
-    if prj.existingandroidmk == nil then
-      premake.escaper(make.esc)
-      premake.generate(prj, androidmk.prjFile(prj), androidmk.generate_projectmk)
-    end
+    premake.escaper(make.esc)
+    premake.generate(prj, androidmk.prjFile(prj), androidmk.generate_projectmk)
   end,
 
   onCleanSolution = function(sln)

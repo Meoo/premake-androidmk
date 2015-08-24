@@ -4,8 +4,8 @@
 -- Author : Bastien Brunnenstein
 --
 
-premake.androidmk = premake.androidmk or {}
-local androidmk = premake.androidmk
+premake.extensions.androidmk = premake.extensions.androidmk or {}
+local androidmk = premake.extensions.androidmk
 
 include "_preload.lua"
 

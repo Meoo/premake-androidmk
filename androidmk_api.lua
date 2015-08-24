@@ -117,15 +117,22 @@ api.register {
   },
 }
 
-
--- Special function to specify an existing Android.mk
--- Use it in a project which have the name of the module you want
--- If you don't know the name of the module, open the Android.mk and look for "LOCAL_MODULE := <name>"
--- You must set the kind to either "StaticLib" or "SharedLib" accordingly
--- Other fields in the project will be silently ignored
+-- Allows to add existing Android.mk projects
 api.register {
   name = "existingandroidmk",
   scope = "project",
-  kind = "file",
+  kind = "list:file",
   tokens = true,
+}
+
+api.register {
+  name = "existingandroidmk_staticlinks",
+  scope = "config",
+  kind = "list:string",
+}
+
+api.register {
+  name = "existingandroidmk_sharedlinks",
+  scope = "config",
+  kind = "list:string",
 }
