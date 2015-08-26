@@ -7,19 +7,6 @@
 local api = premake.api
 
 
--- debug : unoptimized binaries that are easier to debug
--- release : highly optimized binaries
-api.register {
-  name = "ndkoptim",
-  scope = "config",
-  kind = "string",
-  allowed = {
-    "default",
-    "debug",
-    "release",
-  },
-}
-
 -- More info: https://developer.android.com/ndk/guides/abis.html
 api.register {
   name = "ndkabi",

@@ -8,15 +8,6 @@ Note : All the fields starting with `ndk` are solution-wide, but filters can be 
 
 *****
 
-`ndkoptim` : Optimization
-
-Supported values :
-* `default`
-* `debug`
-* `release`
-
-*****
-
 `ndkabi` : ABI targets
 
 Supported values :
@@ -113,6 +104,9 @@ Some useful working commands :
 
 `flags { "C++11" }` : Enable C++11
 
+`optimize "Off"` or `"Debug"` : Enable debug mode (must be used solution-wide)
+
+Symbols are always enabled, use ndk-gdb to debug.
 
 
 ## Sample code
@@ -130,9 +124,9 @@ solution "MySolution"
 	ndkplatform "android-12"
 
 	filter "configurations:Release"
-		ndkoptim "release"
+		optimize "On"
 	filter "configurations:Debug"
-		ndkoptim "debug"
+		optimize "Debug"
 
 
 	project "MyProject"

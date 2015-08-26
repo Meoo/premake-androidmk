@@ -129,9 +129,11 @@ local function agregateOption(sln, cfg, option)
 end
 
 function androidmk.slnOptim(sln, cfg)
-  local optim = agregateOption(sln, cfg, "ndkoptim")
-  if optim then
-    p.w('  APP_OPTIM := %s', optim)
+  local optim = agregateOption(sln, cfg, "optimize")
+  if optim == p.OFF or optim == "Debug" then
+    p.w('  APP_OPTIM := debug')
+  elseif optim ~= nil then
+    p.w('  APP_OPTIM := release')
   end
 end
 
