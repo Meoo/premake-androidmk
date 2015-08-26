@@ -77,11 +77,11 @@ end
 function androidmk.prjCppFeatures(prj, cfg)
   local features = {}
 
-  if cfg.rtti == "On" then
+  if cfg.rtti == p.ON then
     table.insert(features, "rtti")
   end
 
-  if cfg.exceptionhandling == "On" then
+  if cfg.exceptionhandling == p.ON then
     table.insert(features, "exceptions")
   end
 
@@ -232,5 +232,12 @@ function androidmk.prjCFlags(prj, cfg)
 
   if #flags > 0 then
     p.w('  LOCAL_CFLAGS := %s', table.implode(table.translate(flags, p.esc), '', '', ' '))
+  end
+
+
+  local cppflags = premake.config.mapFlags(cfg, androidmk.cppflags)
+
+  if #cppflags > 0 then
+    p.w('  LOCAL_CPPFLAGS := %s', table.implode(table.translate(cppflags, p.esc), '', '', ' '))
   end
 end

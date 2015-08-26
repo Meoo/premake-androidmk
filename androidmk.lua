@@ -27,7 +27,7 @@ end
 androidmk.ldflags = {
   flags = {
     --LinkTimeOptimization = "-flto",
-  },
+  }
 }
 
 androidmk.cflags = {
@@ -40,6 +40,13 @@ androidmk.cflags = {
   warnings = {
     Extra = "-Wall -Wextra",
     Off = "-w",
+  }
+}
+
+androidmk.cppflags = {
+  flags = {
+    ["C++11"] = "-std=c++11",
+    ["C++14"] = "-std=c++14",
   }
 }
 

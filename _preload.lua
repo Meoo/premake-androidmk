@@ -10,7 +10,6 @@ local make = premake.make
 
 
 androidmk.CONFIG_OPTION = "PM5_CONFIG"
-androidmk.ANDROIDMK_KIND = "Android.mk"
 
 
 newaction {
@@ -21,7 +20,6 @@ newaction {
   valid_kinds     = { 
     premake.STATICLIB,
     premake.SHAREDLIB,
-    androidmk.ANDROIDMK_KIND,
   },
 
   valid_languages = { "C", "C++" },

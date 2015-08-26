@@ -4,6 +4,10 @@ Application.mk &amp; Android.mk generator for Premake5
 
 ## Android.mk API
 
+Note : All the fields starting with `ndk` are solution-wide, but filters can be applied.
+
+*****
+
 `ndkoptim` : Optimization
 
 Supported values :
@@ -52,6 +56,22 @@ Supported values :
 
 *****
 
+`ndkstl` : Standard library
+
+Supported values :
+* `default`
+* `libstdc++`
+* `gabi++_static`
+* `gabi++_shared`
+* `stlport_static`
+* `stlport_shared`
+* `gnustl_static`
+* `gnustl_shared`
+* `c++_static`
+* `c++_shared`
+
+*****
+
 `ndktoolchainversion` : Android toolchain version
 
 Supported values :
@@ -73,6 +93,26 @@ Supported values : List of files
 `existingandroidmk_staticlinks` and `existingandroidmk_sharedlinks` : Link libs from existing Android.mk files
 
 Supported values : List of libraries
+
+
+
+## Premake API support
+
+Most functions should work as expected.
+Some limitations apply, for example you cannot change the output folder.
+
+`system` and `architecture` are completely ignored.
+
+You cannot do per ABI filtering yet, but it's technically doable.
+
+Some useful working commands :
+
+`rtti "On"` : Enable RTTI
+
+`exceptionhandling "On"` : Enable C++ exceptions
+
+`flags { "C++11" }` : Enable C++11
+
 
 
 ## Sample code
