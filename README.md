@@ -147,7 +147,7 @@ solution "MySolution"
 			"SDL2/Android.mk",
 		}
 
-		existingandroidmk_staticlinks {
+		existingandroidmk_sharedlinks {
 			"SDL2",
 		}
 ```
