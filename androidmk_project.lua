@@ -162,10 +162,10 @@ function androidmk.prjDependencies(prj, cfg)
     end
   end
 
-  for _, v in ipairs(cfg.existingandroidmk_staticlinks) do
+  for _, v in ipairs(cfg.amk_staticlinks) do
     table.insert(staticdeps, v)
   end
-  for _, v in ipairs(cfg.existingandroidmk_sharedlinks) do
+  for _, v in ipairs(cfg.amk_sharedlinks) do
     table.insert(shareddeps, v)
   end
 

@@ -50,26 +50,35 @@ function androidmk.generate_androidmk(sln)
 
   for cfg in solution.eachconfig(sln) do
     local existingmklist = {}
+    local moduleslist = {}
 
     -- Agregate existing Android.mk files for each project per configuration
     for prj in solution.eachproject(sln) do
       for prjcfg in project.eachconfig(prj) do
         if prjcfg.shortname == cfg.shortname then
-          for _, mkpath in ipairs(prj.existingandroidmk) do
+          for _, mkpath in ipairs(prj.amk_includes) do
             local mkrelpath = path.getrelative(sln.location, mkpath)
             if not table.contains(existingmklist, mkrelpath) then
               table.insert(existingmklist, mkrelpath)
+            end
+          end
+          for _, mod in ipairs(prj.amk_importmodules) do
+            if not table.contains(moduleslist, mod) then
+              table.insert(moduleslist, mod)
             end
           end
         end
       end
     end
 
-    if #existingmklist > 0 then
+    if #existingmklist > 0 or #moduleslist > 0 then
       p.w('')
       p.x('ifeq ($(%s),%s)', androidmk.CONFIG_OPTION, cfg.shortname)
       for _, mkpath in ipairs(existingmklist) do
         p.x('  include $(%s)/%s', curpath, mkpath)
+      end
+      for _, mod in ipairs(moduleslist) do
+        p.x('  $(call import-module,%s)', mod)
       end
       p.w('endif')
     end

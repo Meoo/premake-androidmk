@@ -106,20 +106,28 @@ api.register {
 
 -- Allows to add existing Android.mk projects
 api.register {
-  name = "existingandroidmk",
+  name = "amk_includes",
   scope = "project",
   kind = "list:file",
   tokens = true,
 }
 
 api.register {
-  name = "existingandroidmk_staticlinks",
+  name = "amk_importmodules",
+  scope = "project",
+  kind = "list:string",
+  tokens = true,
+}
+
+-- Links from includes and imports
+api.register {
+  name = "amk_staticlinks",
   scope = "config",
   kind = "list:string",
 }
 
 api.register {
-  name = "existingandroidmk_sharedlinks",
+  name = "amk_sharedlinks",
   scope = "config",
   kind = "list:string",
 }

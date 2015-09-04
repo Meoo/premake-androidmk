@@ -1,5 +1,8 @@
 # premake-androidmk
-Application.mk &amp; Android.mk generator for Premake5
+
+Application.mk &amp; Android.mk generator for Premake5.
+
+This module requires the latest premake version to work (5.0.0 alpha5).
 
 
 ## Android.mk API
@@ -75,15 +78,23 @@ Supported values :
 
 *****
 
-`existingandroidmk` : Include existing Android.mk files
+`amk_includes` : Include existing Android.mk files
 
 Supported values : List of files
 
 *****
 
-`existingandroidmk_staticlinks` and `existingandroidmk_sharedlinks` : Link libs from existing Android.mk files
+`amk_importmodules` : Import Android.mk modules
+
+Supported values : List of strings
+
+*****
+
+`amk_staticlinks` and `amk_sharedlinks` : Link libs from included Android.mk files and imported modules
 
 Supported values : List of libraries
+
+If you want to link to system libraries or other projects in the solution, use `links` instead.
 
 
 
@@ -143,11 +154,11 @@ solution "MySolution"
 			"log",
 		}
 
-		existingandroidmk {
+		amk_includes {
 			"SDL2/Android.mk",
 		}
 
-		existingandroidmk_sharedlinks {
+		amk_sharedlinks {
 			"SDL2",
 		}
 ```
