@@ -6,7 +6,7 @@
 
 premake.extensions.androidmk = premake.extensions.androidmk or {}
 local androidmk = premake.extensions.androidmk
-local make = premake.make
+local make = premake.make or {}
 
 
 androidmk.CONFIG_OPTION = "PM5_CONFIG"
